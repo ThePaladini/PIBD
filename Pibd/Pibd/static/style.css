@@ -1,0 +1,76 @@
+/* styles.css */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2; /* Greyish background */
+    margin: 0;
+    padding: 0;
+}
+
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.top-menu {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50px; /* Adjust height as needed */
+    background-color: #f7f7f9;
+}
+
+/* styles.css */
+.menu {
+    position: fixed;
+    background-color: #f7f7f9;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.left-menu {
+    top: 0;
+    left: 0;
+    width: 200px;
+    height: 100%;
+    border-right: 1px solid #ccc;
+    background-color: #f7f7f9;
+}
+
+.menu-option {
+    margin-top: 5px;
+    padding: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out, border-radius 0.3s ease-in-out;
+    border-radius: 15px;
+}
+
+.menu-option:hover {
+    background-color: #ffdddd; /* Light redish color on mouseover */
+}
+
+.options {
+    margin-top: 5px;
+}
+
+.content {
+    margin-left: 200px;
+    padding: 20px;
+}
+
+
+.logo{
+    width: 100%;
+    height: 5%;
+    margin-top: 10px;
+    background: url("/static/logo.jpg") no-repeat center center;
+    background-size: contain; 
+}
+.sublogo{
+    width: 100%;
+    height: 2%;
+    margin-top: 15px;
+    background-size: contain; 
+}
+
