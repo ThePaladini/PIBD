@@ -19,3 +19,5 @@ def data_coord_admin(request):
 def comp_curriculares(request):
     return render(request, 'comp_curriculares.html')
 
+def lista_oferta_coletiva(request):
+    return render(request, 'lista_oferta_coletiva.html')

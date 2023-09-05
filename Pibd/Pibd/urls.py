@@ -11,5 +11,5 @@ urlpatterns = [
     path('registro_coordenador_administrativo/', views.registro_coordenador_administrativo, name='registro_coordenador_administrativo'),
     path('data_coord_admin/', views.data_coord_admin, name='data_coord_admin'),
     path('comp_curriculares/', views.comp_curriculares, name='comp_curriculares'),
-    
+    path('lista_oferta_coletiva/', views.lista_oferta_coletiva, name='lista_oferta_coletiva'),
 ]
