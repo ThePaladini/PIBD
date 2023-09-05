@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title> Visuzalização de Coordenador Administrativo</title>
+    {% load static %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+</head>
+<body>
+    <div class="menu top-menu">
+        <!-- Top Menu Content Goes Here -->
+    </div>
+    <div class="menu left-menu">
+        <div class="logo"></div>
+        <div class="sublogo">
+            <div class="container">
+                <p>Andifes</p>
+            </div>
+        </div>
+        <div class="options">
+            <div class="menu-option">Option 1</div>
+            <div class="menu-option">Option 2</div>
+            <div class="menu-option">Option 3</div>
+            <div class="menu-option">Option 4</div>
+            <div class="menu-option">Option 5</div>
+            <div class="menu-option">Option 6</div>
+            <div class="menu-option">Option 7</div>
+            <div class="menu-option">Option 8</div>
+        </div>
+    </div>
+    <div class="content">
+        <!-- Registro de Coordenador Administrativo -->
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Registro de Coordenador Administrativo</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <label for="nome">Nome:</label>
+                <p>{{ nome }}</p>
+            </div>
+            <div class="col-md-4">
+                <label for="sobrenome">Sobrenome:</label>
+                <p>{{ sobrenome }}</p>
+            </div>
+            <div class="col-md-4">
+                <label for="cpf">CPF:</label>
+                <p>{{ cpf }}</p>
+            </div>
+            <div class="col-md-4">
+                <label for="data-nascimento">Data de Nascimento:</label>
+                <p>{{ data_nascimento }}</p>
+            </div>
+            <div class="col-md-4">
+                <label for="sexo">Sexo:</label>
+                <p>{{ sexo }}</p> 
+            </div>
+            
+<!--ENDEREÇO-->
+<div class="col-md-6">
+    <label for="logradouro">Logradouro:</label>
+    <p>{{ logradouro }}</p>
+</div>
+<div class="col-md-2">
+    <label for="numero">Número:</label>
+    <p>{{ numero }}</p>
+</div>
+<div class="col-md-4">
+    <label for="complemento">Complemento:</label>
+    <p>{{ complemento }}</p>
+</div>
+<div class="col-md-4">
+    <label for="bairro">Bairro:</label>
+    <p>{{ bairro }}</p>
+</div>
+<div class="col-md-2">
+    <label for="cep">CEP:</label>
+    <p>{{ cep }}</p>
+</div>
+<div class="col-md-4">
+    <label for="cidade">Cidade:</label>
+    <p>{{ cidade }}</p>
+</div>
+<div class="col-md-2">
+    <label for="estado">Estado:</label>
+    <p>{{ estado }}</p>
+</div>
+<div class="col-md-2">
+    <label for="pais">País:</label>
+    <p>{{ pais }}</p>
+</div>
+
+    <!-- Telefone -->
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Telefone</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+            <label for="ddi">DDI:</label>
+            <p>{{ ddi }}</p>
+        </div>
+        <div class="col-md-2">
+            <label for="ddd">DDD:</label>
+            <p>{{ ddd }}</p>
+        </div>
+        <div class="col-md-4">
+            <label for="numero-telefone">Número:</label>
+            <p>{{ numero_telefone }}</p>
+        </div>
+    </div>
+
+    <!-- Nome IES, CNPJ, Link Lattes, Email Pessoal, Email Institucional -->
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Informações Adicionais</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <label for="nome-ies">Nome IES:</label>
+            <p>{{ nome_ies }}</p>      
+
+        </div>
+        <div class="col-md-4">
+            <label for="cnpj">CNPJ:</label>
+            <p>{{ cnpj }}</p>
+        </div>
+        <div class="col-md-4">
+            <label for="link-lattes">Link Lattes:</label>
+            <p>{{link_lattes }}</p>
+        </div>
+        <div class="col-md-4">
+            <label for="email-pessoal">Email Pessoal:</label>
+            <p>{{email_pessoal }}</p>
+        </div>
+        <div class="col-md-4">
+            <label for="email-institucional">Email Institucional:</label>
+            <p>{{ email_institucional }}</p>
+        </div>
+    </div>
+
+            
+</body>
+ </html>
+        
