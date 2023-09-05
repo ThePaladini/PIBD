@@ -12,3 +12,6 @@ def cadastro_ies(request):
 
 def registro_coordenador_administrativo(request):
     return render(request, 'registro_coordenador_administrativo.html')
+
+def data_coord_admin(request):
+    return render(request, 'data_coord_admin.html')
