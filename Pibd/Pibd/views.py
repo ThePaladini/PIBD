@@ -15,3 +15,7 @@ def registro_coordenador_administrativo(request):
 
 def data_coord_admin(request):
     return render(request, 'data_coord_admin.html')
+
+def comp_curriculares(request):
+    return render(request, 'comp_curriculares.html')
+
