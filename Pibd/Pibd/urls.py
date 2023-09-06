@@ -4,8 +4,10 @@ from django.urls import include
 from . import views
 
 urlpatterns = [
+    path('', views.main, name="index"),
     path('admin/', admin.site.urls),
-    path('insert_info/', views.insert, name='insert_info'),
+    path('index/', views.main, name="index"),
+    path('insert_professor_ministrante/', views.insert_professor_ministrante, name='insert_professor_ministrante'),
     path('cadastro_ies/', views.cadastro_ies, name='cadastro_ies'),
     path('registro_coordenador_administrativo/', views.registro_coordenador_administrativo, name='registro_coordenador_administrativo'),
     path('registrar_coordenador_administrativo/', views.registrar_coordenador_administrativo, name='registrar_coordenador_administrativo'),
