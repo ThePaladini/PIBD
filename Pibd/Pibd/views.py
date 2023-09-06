@@ -15,6 +15,14 @@ def registro_coordenador_administrativo(request):
     return render(request, 'registro_coordenador_administrativo.html')
 
 def data_coord_admin(request):
+    return render(request, 'data_coord_admin.html')
+
+def comp_curriculares(request):
+    return render(request, 'comp_curriculares.html')
+
+def lista_oferta_coletiva(request):
+    return render(request, 'lista_oferta_coletiva.html')
+
     context = {
         'page_title': 'Admin Dashboard',
         'user_name': 'John Doe',
@@ -89,3 +97,4 @@ def create_ies(request):
                 error_message = f"Failed to create IES: {str(e)}"
 
     return render(request, 'cadastro_ies.html', {'success_message': success_message, 'error_message': error_message})
+
