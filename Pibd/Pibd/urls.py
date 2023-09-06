@@ -13,5 +13,6 @@ urlpatterns = [
     path('lista_oferta_coletiva/', views.lista_oferta_coletiva, name='lista_oferta_coletiva'),
     path('data_test/', views.view_data, name='data_test'),
     path('create_ies/', views.create_ies, name='create_ies'),
+    path('turma_esp_doc_autor', views.turma_esp_doc_autor, name='turma_esp_doc_autor'),
 ]
     
