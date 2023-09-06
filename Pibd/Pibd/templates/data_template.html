@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Data Template</title>
+</head>
+<body>
+    <h1>Data Retrieved from PostgreSQL View</h1>
+    <ul>
+        {% for item in data %}
+            <li>
+                Nome Componente: {{ item.0 }}<br>
+                Sigla: {{ item.1 }}<br>
+                Semestre: {{ item.2 }}<br>
+                Vagas Disponíveis: {{ item.3 }}
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
