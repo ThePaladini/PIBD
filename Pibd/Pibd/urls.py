@@ -5,7 +5,6 @@ from . import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('hello/', views.hello_world, name='hello_world'),
     path('insert_info/', views.insert, name='insert_info'),
     path('cadastro_ies/', views.cadastro_ies, name='cadastro_ies'),
     path('registro_coordenador_administrativo/', views.registro_coordenador_administrativo, name='registro_coordenador_administrativo'),
@@ -14,4 +13,5 @@ urlpatterns = [
     path('lista_oferta_coletiva/', views.lista_oferta_coletiva, name='lista_oferta_coletiva'),
     path('data_test/', views.view_data, name='data_test'),
     path('create_ies/', views.create_ies, name='create_ies'),
+]
     

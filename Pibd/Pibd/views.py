@@ -1,9 +1,8 @@
+from datetime import date
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.db import connection
 
-def hello_world(request):
-    return render(request, 'hello.html')
 
 def insert(request):
     return render(request, 'alter_info_professor_ministrante.html')    
@@ -15,14 +14,7 @@ def registro_coordenador_administrativo(request):
     return render(request, 'registro_coordenador_administrativo.html')
 
 def data_coord_admin(request):
-    return render(request, 'data_coord_admin.html')
-
-def comp_curriculares(request):
-    return render(request, 'comp_curriculares.html')
-
-def lista_oferta_coletiva(request):
-    return render(request, 'lista_oferta_coletiva.html')
-
+    
     context = {
         'page_title': 'Admin Dashboard',
         'user_name': 'John Doe',
@@ -38,19 +30,41 @@ def lista_oferta_coletiva(request):
             'User1', 'User2', 'User3', 'User4', 'User5'
         ]
     }
+
     return render(request, 'data_coord_admin.html', context)
 
+def comp_curriculares(request):
+    view = 'componente_curricular'
 
-def view_data(request):
+    if request.method == 'GET':
+        if request.GET.get('dropdown') == '1':
+            view = 'apresenta_componentes_por_idioma'
+        elif request.GET.get('dropdown') == '2':
+            view = 'apresenta_componentes_por_carga_teorica'
+        elif request.GET.get('dropdown') == '3':
+            view = 'apresenta_componentes_por_carga_pratica'
+        elif request.GET.get('dropdown') == '4':
+            view = 'apresenta_componentes_por_eixo_tematico'
+
     with connection.cursor() as cursor:
-        cursor.execute('SELECT * FROM vw_turma_especializacao_agrupada')
-        data = cursor.fetchall()
+        cursor.execute('SELECT * FROM ' + view)
+        results = cursor.fetchall()
 
-    # Process the data as needed
-    # For example, you can convert it into a list of dictionaries
+    context = {'results': results, 'selected_value': request.GET.get('dropdown')}
+    return render(request, 'comp_curriculares.html', context)
 
-    context = {'data': data}
-    return render(request, 'data_template.html', context)
+def lista_oferta_coletiva(request):
+    return render(request, 'lista_oferta_coletiva.html')
+
+
+def view_data(request): #for tests
+    view = 'apresenta_componentes_por_carga_teorica'
+    with connection.cursor() as cursor:
+        cursor.execute('SELECT * FROM ' + view)
+        results = cursor.fetchall()
+
+    context = {'results': results}
+    return render(request, 'comp_curriculares.html', context)
 
 
 def create_ies(request):
@@ -59,12 +73,14 @@ def create_ies(request):
 
     if request.method == 'POST':
         nome_ies = request.POST.get('nome-ies')
+        participou_isf = request.POST.get('participou-Isf') == 'on'
         sigla = request.POST.get('sigla')
         campus = request.POST.get('campus')
         cnpj = request.POST.get('cnpj')
-        logradouro = request.POST.get('logradouro')
+        rua = request.POST.get('logradouro')
         complemento = request.POST.get('complemento')
         bairro = request.POST.get('bairro')
+        cidade = request.POST.get('cidade')
         estado = request.POST.get('estado')
         pais = request.POST.get('pais')
         numero = request.POST.get('numero')
@@ -72,24 +88,26 @@ def create_ies(request):
         ddi = request.POST.get('ddi')
         ddd = request.POST.get('ddd')
         numero_telefone = request.POST.get('numero-telefone')
-        nucli = request.POST.get('nucli')
-        labmaisunidos = request.POST.get('labmaisunidos')
+        nucli = request.POST.get('nucli') == 'on'
+        labmaisunidos = request.POST.get('labmaisunidos') == 'on'
         link_politica = request.POST.get('link-politica')
         data_politica = request.POST.get('data-politica')
+        documento_politica = "C:/path/para/arquivo/documento.pdf"
 
 
         # Define your SQL queries based on the form data
-        endereco_query = "INSERT INTO cep_endereco (cep, rua, bairro, cidade, estado, pais) VALUES (%s, %s, %s, %s, %s, %s)"
-        ies_query = "INSERT INTO ies (cnpj, sigla, participou_isf, tem_lab_mais_unidos, possui_nucleo_ativo, cep_ies, numero, complemento, link_politica_ling, data_politica_ling, doc_politica_ling, campus, nome_principal) VALUES (%s, %s, true, true, true, %s, %s, %s, %s, %s, '', %s, %s)"
-        telefone_query = "INSERT INTO telefone_ies (cnpj_ies, ddi, ddd, numero) VALUES (%s ,%s, %s, %s)"
+        query = """CALL proc_cadastra_ies(%s::VARCHAR, %s::VARCHAR, %s::BOOLEAN, %s::BOOLEAN, %s::BOOLEAN, %s::VARCHAR, 
+                    %s::VARCHAR, %s::VARCHAR, %s::VARCHAR, %s::VARCHAR, %s::VARCHAR, %s::INTEGER, %s::VARCHAR, %s::VARCHAR, 
+                    %s::DATE, %s::VARCHAR, %s::VARCHAR, %s::VARCHAR, %s::VARCHAR, %s::VARCHAR, %s::VARCHAR)"""    
+        args = (cnpj, sigla, participou_isf, labmaisunidos, nucli, cep, rua, bairro, 
+                cidade, estado, pais, numero, complemento, link_politica, data_politica,
+                documento_politica, campus, nome_ies, ddd, ddi, numero_telefone)
 
         # Execute the SQL queries
         with connection.cursor() as cursor:
             try:
-                cursor.execute(endereco_query, (cep, logradouro, bairro, 'Cidade A', estado, pais))
-                cursor.execute(ies_query, (cnpj, sigla, cep, numero, complemento, link_politica, data_politica, campus, nome_ies))
-                cursor.execute(telefone_query, (cnpj ,ddi, ddd, numero_telefone))
-
+                cursor.execute(query, args)
+              
                 # If all queries are successful, set success_message
                 success_message = "IES created successfully."
             except Exception as e:
@@ -97,4 +115,3 @@ def create_ies(request):
                 error_message = f"Failed to create IES: {str(e)}"
 
     return render(request, 'cadastro_ies.html', {'success_message': success_message, 'error_message': error_message})
-

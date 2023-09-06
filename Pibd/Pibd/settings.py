@@ -77,14 +77,13 @@ WSGI_APPLICATION = 'Pibd.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',        # Your database name
+        'NAME': 'Isf',             # Your database name
         'USER': 'postgres',        # Your database username
         'PASSWORD': 'docker',      # Your database password
-        'HOST': 'localhost',       # PostgreSQL server host
+        'HOST': '127.0.0.1',       # PostgreSQL server host
         'PORT': '5555',            # PostgreSQL server port
     }
 }
-
 
 
 # Password validation
