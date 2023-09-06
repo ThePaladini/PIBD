@@ -12,7 +12,8 @@
 <body>
     {% include 'menu.html' %}
     <div class="content">
-        <form>
+        <form method="post" action="{% url 'registrar_coordenador_administrativo' %}">
+            {% csrf_token %}
             <!-- Registro de Coordenador Administrativo -->
             <div class="row">
                 <div class="col-md-12">
@@ -21,112 +22,21 @@
             </div>
             <div class="row">
                 <div class="col-md-4">
-                    <label for="nome">Nome:</label>
-                    <input type="text" class="form-control" id="nome">
+                    <label for="nome">Função:</label>
+                    <input value="{{results.0.1}}" type="text" class="form-control" id="func" name="func">
                 </div>
                 <div class="col-md-4">
-                    <label for="sobrenome">Sobrenome:</label>
-                    <input type="text" class="form-control" id="sobrenome">
+                    <label for="sobrenome">Curriculo:</label>
+                    <input value="{{results.0.2}}" type="text" class="form-control" id="curiculo" name="curiculo">
                 </div>
                 <div class="col-md-4">
-                    <label for="cpf">CPF:</label>
-                    <input type="text" class="form-control" id="cpf">
+                    <label for="cpf">Data Cadastro:</label>
+                    <input value="{{results.0.4}}" type="text" class="form-control" id="data" name="poca">
                 </div>
                 <div class="col-md-4">
-                    <label for="data-nascimento">Data de Nascimento:</label>
-                    <input type="date" class="form-control" id="data-nascimento">
+                    <label for="data-nascimento">Poca:</label>
+                    <input value="{{data}}" type="date" class="form-control" id="poca" name="data">
                 </div>
-                <div class="col-md-4">
-                    <label for="sexo">Sexo:</label>
-                    <select class="form-control" id="sexo">
-                        <option value="M">Masculino</option>
-                        <option value="F">Feminino</option>
-                        <option value="O">Outro</option>
-                    </select>
-                </div>
-                <div class="col-md-6">
-                    <label for="logradouro">Logradouro:</label>
-                    <input type="text" class="form-control" id="logradouro">
-                </div>
-                <div class="col-md-2">
-                    <label for="numero">Número:</label>
-                    <input type="text" class="form-control" id="numero">
-                </div>
-                <div class="col-md-4">
-                    <label for="complemento">Complemento:</label>
-                    <input type="text" class="form-control" id="complemento">
-                </div>
-                <div class="col-md-4">
-                    <label for="bairro">Bairro:</label>
-                    <input type="text" class="form-control" id="bairro">
-                </div>
-                <div class="col-md-2">
-                    <label for="cep">CEP:</label>
-                    <input type="text" class="form-control" id="cep">
-                </div>
-                <div class="col-md-4">
-                    <label for="cidade">Cidade:</label>
-                    <input type="text" class="form-control" id="cidade">
-                </div>
-                <div class="col-md-2">
-                    <label for="estado">Estado:</label>
-                    <input type="text" class="form-control" id="estado">
-                </div>
-                <div class="col-md-2">
-                    <label for="pais">País:</label>
-                    <input type="text" class="form-control" id="pais">
-                </div>
-            </div>
-
-            <!-- Telefone -->
-            <div class="row">
-                <div class="col-md-12">
-                    <h2>Telefone</h2>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-2">
-                    <label for="ddi">DDI:</label>
-                    <input type="text" class="form-control" id="ddi">
-                </div>
-                <div class="col-md-2">
-                    <label for="ddd">DDD:</label>
-                    <input type="text" class="form-control" id="ddd">
-                </div>
-                <div class="col-md-4">
-                    <label for="numero-telefone">Número:</label>
-                    <input type="text" class="form-control" id="numero-telefone">
-                </div>
-            </div>
-
-            <!-- Nome IES, CNPJ, Link Lattes, Email Pessoal, Email Institucional -->
-            <div class="row">
-                <div class="col-md-12">
-                    <h2>Informações Adicionais</h2>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-4">
-                    <label for="nome-ies">Nome IES:</label>
-                    <input type="text" class="form-control" id="nome-ies">
-                </div>
-                <div class="col-md-4">
-                    <label for="cnpj">CNPJ:</label>
-                    <input type="text" class="form-control" id="cnpj">
-                </div>
-                <div class="col-md-4">
-                    <label for="link-lattes">Link Lattes:</label>
-                    <input type="text" class="form-control" id="link-lattes">
-                </div>
-                <div class="col-md-4">
-                    <label for="email-pessoal">Email Pessoal:</label>
-                    <input type="email" class="form-control" id="email-pessoal">
-                </div>
-                <div class="col-md-4">
-                    <label for="email-institucional">Email Institucional:</label>
-                    <input type="email" class="form-control" id="email-institucional">
-                </div>
-            </div>
 
             <!-- Submit Button -->
             <div class="row">
@@ -135,6 +45,15 @@
                 </div>
             </div>
         </form>
+        <!-- Success Message -->
+        {% if success_message %}
+        <div class="alert alert-success">{{ success_message }}</div>
+        {% endif %}
+
+        <!-- Error Message -->
+        {% if error_message %}
+        <div class="alert alert-danger">{{ error_message }}</div>
+        {% endif %}
     </div>
 </body>
 </html>
