@@ -2,16 +2,59 @@ from datetime import date
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.db import connection
+from datetime import date
 
 
 def insert(request):
-    return render(request, 'alter_info_professor_ministrante.html')    
+    return render(request, 'alter_info_professor_ministrante.html')
+
+
+def turma_esp(request):
+    return render(request, 'view_turma_esp.html')     
 
 def cadastro_ies(request):
     return render(request, 'cadastro_ies.html')
 
 def registro_coordenador_administrativo(request):
-    return render(request, 'registro_coordenador_administrativo.html')
+    with connection.cursor() as cursor:
+        cursor.execute('SELECT * FROM coordenador_administrativo where coordenador_administrativo.cpf_coordenador = \'98765432101\'')
+        results = cursor.fetchall()
+    context = {'results': results, 'data': results[0][3].strftime('%Y-%m-%d')}
+    return render(request, 'registro_coordenador_administrativo.html', context)
+
+
+def registrar_coordenador_administrativo(request):
+    success_message = None
+    error_message = None
+    if request.method == 'POST':
+        func = request.POST.get('func')
+        curriculo = request.POST.get('curiculo')
+        data = request.POST.get('data')
+        poca = request.POST.get('poca')
+        with connection.cursor() as cursor:
+            cursor.execute('SELECT * FROM coordenador_administrativo where coordenador_administrativo.cpf_coordenador = \'98765432101\'')
+            results = cursor.fetchall()
+
+                    # Define your SQL queries based on the form data
+            query = """CALL proc_atualizar_coordenador_administrativo(
+                                            '98765432101',                -- cpf_coordenador_param
+                                            %s::VARCHAR,               -- funcao_na_instituicao_param
+                                            %s::VARCHAR, -- curriculo_lates_param
+                                            %s::DATE,                -- data_cadastro_param (date in 'YYYY-MM-DD' format)
+                                            %s::VARCHAR                    -- poca_param
+                                        );"""    
+            args = (func, curriculo, data, poca)
+
+            # Execute the SQL queries
+            with connection.cursor() as cursor:
+                try:
+                    cursor.execute(query, args)
+                    # If all queries are successful, set success_message
+                    success_message = "coordenador altered successfully."
+                except Exception as e:
+                    # If there's an error, set error_message
+                    error_message = f"Failed to alter coordenador: {str(e)}"   
+    return render(request, 'registro_coordenador_administrativo.html', {'success_message': success_message, 'error_message': error_message})
 
 def data_coord_admin(request):
     
