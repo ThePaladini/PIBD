@@ -4,13 +4,14 @@ from django.http import HttpResponse
 from django.db import connection
 from datetime import date
 
+def main(request):
+    return render(request, 'index.html')
 
-def insert(request):
+def insert_professor_ministrante(request):
     return render(request, 'alter_info_professor_ministrante.html')
 
-
 def turma_esp(request):
-    return render(request, 'view_turma_esp.html')     
+    return render(request, 'view_turma_esp.html')
 
 def cadastro_ies(request):
     return render(request, 'cadastro_ies.html')

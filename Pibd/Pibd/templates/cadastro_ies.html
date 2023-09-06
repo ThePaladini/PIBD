@@ -13,27 +13,7 @@
     <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}" />
   </head>
   <body>
-    <div class="menu top-menu">
-      <!-- Top Menu Content Goes Here -->
-    </div>
-    <div class="menu left-menu">
-      <div class="logo"></div>
-      <div class="sublogo">
-        <div class="container">
-          <p>Andifes</p>
-        </div>
-      </div>
-      <div class="options">
-        <div class="menu-option">Option 1</div>
-        <div class="menu-option">Option 2</div>
-        <div class="menu-option">Option 3</div>
-        <div class="menu-option">Option 4</div>
-        <div class="menu-option">Option 5</div>
-        <div class="menu-option">Option 6</div>
-        <div class="menu-option">Option 7</div>
-        <div class="menu-option">Option 8</div>
-      </div>
-    </div>
+    {% include 'menu.html' %}
     <div class="content">
       <form method="post" action="{% url 'create_ies' %}">
         {% csrf_token %}
